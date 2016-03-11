@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4A8323DB-FA09-4964-A92D-F0D26E26C3B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FASTService</RootNamespace>
+    <AssemblyName>FASTService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.8\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.8\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccessLevel.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccessRight.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AssetAssignment.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AssetClass.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AssetStatu.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AssetType.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AssignmentStatu.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuditTrail.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Department.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\EmployeeStatus.cs" />
+    <Compile Include="Enum\LoginStatus.cs" />
+    <Compile Include="Enum\RegistrationStatus.cs" />
+    <Compile Include="FASTDataModule.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FASTDataModule.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FASTDataModule.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FASTDataModule.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FASTDataModule.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="FixAsset.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Issuer.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EmployeeModel.cs" />
+    <Compile Include="Model\FixAssetModel.cs" />
+    <Compile Include="Model\NewUserModel.cs" />
+    <Compile Include="Position.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Process\AssignmentProcess.cs" />
+    <Compile Include="Process\AuditTrailProcess.cs" />
+    <Compile Include="Process\AccessRightProcess.cs" />
+    <Compile Include="Process\FixAssetManagementProcess.cs" />
+    <Compile Include="Process\AuthenticateProcess.cs" />
+    <Compile Include="Process\BaseProcess.cs" />
+    <Compile Include="Process\DepartmentProcess.cs" />
+    <Compile Include="Process\EmployeeManagementProcess.cs" />
+    <Compile Include="Process\IssuerProcess.cs" />
+    <Compile Include="Process\LocationProcess.cs" />
+    <Compile Include="Process\PositionProcess.cs" />
+    <Compile Include="Process\RegisterProcess.cs" />
+    <Compile Include="Process\ReportsProcess.cs" />
+    <Compile Include="Process\TransactionProcess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReasonCode.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Registration.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Encryption.cs" />
+    <Compile Include="vwAssetAssignment.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwAssetAssignmentsForCustodian.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwAssetAssignmentsForManager.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwAssetAssignmentsForMI.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwCustodiansList.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwDepartmentList.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwEmployeeList.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwFixAssetList.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwManagersList.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwMISList.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="FASTDataModule.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FASTDataModule.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="FASTDataModule.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FASTDataModule.edmx</DependentUpon>
+      <LastGenOutput>FASTDataModule.Context.cs</LastGenOutput>
+    </None>
+    <None Include="FASTDataModule.edmx.diagram">
+      <DependentUpon>FASTDataModule.edmx</DependentUpon>
+    </None>
+    <None Include="FASTDataModule.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FASTDataModule.edmx</DependentUpon>
+      <LastGenOutput>FASTDataModule.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

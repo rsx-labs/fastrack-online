@@ -1,0 +1,86 @@
+﻿@model IEnumerable<FASTService.AuditTrail>
+@{
+    ViewBag.Title = "FASTrack Audit Trails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var trails = new WebGrid(Model, canPage: true, rowsPerPage: 25, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "trailsContainer");
+    trails.Pager(WebGridPagerModes.NextPrevious);
+
+    var startDate = TempData["StartDate"];
+    var employeeID = TempData["EmployeeID"];
+    var assetTag = TempData["AssetTag"];
+    var assignmentID = TempData["AssignmentID"];
+}
+<br/>
+<div class="navbar-collapse collapse">
+    @Html.Partial("_EmployeeProfilePartial")
+</div>
+<br/>
+<div id="serchKeyContainer">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search</h3>
+        </div>
+        <div class="panel-body" style="background-color:whitesmoke;">
+        @using (Html.BeginForm("Search", "AuditTrail", FormMethod.Post, new {@class="form-horizontal" }))
+        {
+            <form class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="startDate">Start Date</label>
+                        <div class="col-lg-10">
+                            <input value="@startDate" style="width:160px" class="form-control" type="text" id="startDate" name="startDate" placeholder="Please select a date" maxlength="6" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="employeeID">Employee ID</label>
+                        <div class="col-lg-3" style="width:150px">
+                            <input value="@employeeID" class="form-control" type="text" id="employeeID" name="employeeID" placeholder="Employee ID" maxlength="10" />
+                        </div>
+                        <label class="col-lg-2 control-label" for="assetTag">Asset Tag</label>
+                        <div class="col-lg-3" style="width:150px">
+                            <input value ="@assetTag" class="form-control" type="text" id="assetTag" name="assetTag" placeholder="Asset Tag" maxlength="50" />
+                        </div>
+                        <label class="col-lg-2 control-label" for="assignmentID">Assignment ID</label>
+                        <div class="col-lg-3" style="width:150px">
+                            <input value="@assignmentID" class="form-control" type="text" id="ssignmentID" name="assignmentID" placeholder="Assignment ID" maxlength="6" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" name="search" class="btn btn-primary">Search</button>
+                            <button type="submit" name="print" class="btn btn-default" formtarget="_blank">Print Result</button>
+                         </div>
+                    </div>
+                </fieldset>
+            </form>
+        }
+        </div>
+    </div>
+</div>
+<div id="trailsContainer">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Audit Trail</h3>
+        </div>
+        <div class="panel-body">
+            @trails.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+        columns: trails.Columns(
+        trails.Column("Date", "Date", canSort: false, style: "col-lg-2"),
+                 trails.Column("EmployeeID", "Employee ID", canSort: false, style: "col-lg-2 col-lg-offset-1"),
+                 trails.Column("AssignmentID", "Assignment ID", canSort: false, style: "col-lg-2"),
+                 trails.Column("AssetTag", "Asset Tag", canSort: false, style: "col-lg-1"),
+                 trails.Column("Action", "Action", canSort: false, style: "col-lg-1"),
+                 trails.Column("AdditionalInformation", "Remarks", canSort: false)
+                ))
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#startDate").datepicker({ dateFormat: 'mm/dd/yy' });
+        });
+</script>
+

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<FASTWeb.Models.FixAsset.FixAssetViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Assets</h2>
+
+<p>
+    @Html.ActionLink("Create New", "NewAsset")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetTag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.AssetType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssetClass)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SerialNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetTag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetClass)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditAsset", new { mod=item.FixAssetID }) 
+        </td>
+    </tr>
+}
+
+</table>

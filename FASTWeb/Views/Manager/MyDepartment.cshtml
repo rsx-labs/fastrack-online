@@ -1,0 +1,58 @@
+﻿
+@{
+    
+    FASTService.vwDepartmentList department = (FASTService.vwDepartmentList)TempData["Department"];
+    ViewBag.Title = department.DepartmentName + " - Department";
+}
+<br />
+
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">@department.GroupName</h3>
+        </div>
+    </div>
+    <div>
+        <div class="panel-info col-lg-3">
+            <div class="panel-heading">
+                <span class="panel-title"/>
+            </div>
+            <div class="panel-body" style="background-color:aliceblue">
+                <center>
+                    <img src="~/Images/department.jpg" width="200" height="150" class="img-rounded" />
+                </center>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item small">
+                        <span class="badge">(0)</span>
+                        @Html.ActionLink("For Approval", "", "")
+                    </li>
+                </ul>
+                <div class="list-group list-group-item-info">
+                    <a class="list-group-item" href="@Url.Action("Unavailable","Home")">Employee List</a>
+                    <a class="list-group-item" href="@Url.Action("Unavailable","Home")">Assignments</a>
+                    <a class="list-group-item" href="@Url.Action("Unavailable","Home")">Assets</a>
+                    <a class="list-group-item" href="@Url.Action("Others","Manager")">Others</a>
+                </div>
+            </div>
+            
+        </div>
+        <div class="panel-info col-lg-9">
+            <div class="panel-info">
+                <div class="panel-body">
+                    <h3>Department in a glance...</h3>
+                    <blockquote>
+                        <h4>Number of employees : 12</h4>
+                        <h4>Number of assets assignedd..</h4>
+                    </blockquote>
+                </div>
+            </div>  
+            <div class="panel">
+                This is where the approvals.....
+            </div>   
+        </div>
+    </div>
+    
+</div>
+<br />

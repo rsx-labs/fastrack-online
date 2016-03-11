@@ -1,0 +1,120 @@
+﻿@model FASTWeb.Models.Employee.EmployeeViewModel
+
+@{
+    ViewBag.Title = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="panel col-lg-12">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <fieldset>
+                @Html.ValidationSummary(true)
+                <legend>Edit Personal Information</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeID, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.EmployeeID, new { disabled = false })
+                        @Html.ValidationMessageFor(model => model.EmployeeID)
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.EmployeeID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.FirstName)
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.MiddleName)
+                        @Html.ValidationMessageFor(model => model.MiddleName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.LastName)
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.Gender, new SelectList(new[]
+                {
+                    "Male",  "Female"
+                }))
+                        @Html.ValidationMessageFor(model => model.Gender)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PhoneNumber)
+                        @Html.ValidationMessageFor(model => model.PhoneNumber)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.EmailAddress)
+                        @Html.ValidationMessageFor(model => model.EmailAddress)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.ValidationMessageFor(model => model.DepartmentID)
+                        @Html.DropDownListFor(model => model.DepartmentID, new SelectList(ViewBag.Departments, "DepartmentID", "GroupName"))
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.ValidationMessageFor(model => model.PositionID)
+                        @Html.DropDownListFor(model => model.PositionID, new SelectList(ViewBag.Positions, "PositionID", "Description"))
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.CompanyName)
+                        @Html.ValidationMessageFor(model => model.CompanyName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.CheckBoxFor(model => model.Status_booleanVal) Active
+                        @Html.ValidationMessageFor(model => model.Status_booleanVal)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-9 pull-right">
+                        <input type="submit" value="Save changes" class="btn btn-default" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    }
+</div>
+
