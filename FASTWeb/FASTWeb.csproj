@@ -327,6 +327,8 @@
     <Content Include="Views\Manager\MyDepartment.cshtml" />
     <Content Include="Views\Authenticate\ChangePassword.cshtml" />
     <Content Include="Views\Manager\_PartialManageUnavailable.cshtml" />
+    <Content Include="Views\Report\MyAssignedAssetsReport.cshtml" />
+    <Content Include="Views\Report\MyAssetHistoryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

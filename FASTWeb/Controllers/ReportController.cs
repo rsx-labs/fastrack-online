@@ -268,5 +268,32 @@ namespace FASTWeb.Controllers
             Response.End();
 
         }
+
+        [Authorize]
+        public ActionResult MyAssignedAssetsReport()
+        {
+            FASTService.Process.AssignmentProcess assignProcess = new AssignmentProcess();
+            List<FASTService.vwAssetAssignment> assignments = new List<vwAssetAssignment>();
+
+            int employeeID = 0;
+            Int32.TryParse(User.Identity.Name, out employeeID);
+
+            assignments = assignProcess.GetCurrentAssignmentByEmployeeID(employeeID);
+            return View(assignments);
+        }
+
+        [Authorize]
+        public ActionResult MyAssetHistoryReport()
+        {
+            FASTService.Process.AssignmentProcess assignProcess = new AssignmentProcess();
+            List<FASTService.vwAssetAssignment> assignments = new List<vwAssetAssignment>();
+
+            int employeeID = 0;
+            Int32.TryParse(User.Identity.Name, out employeeID);
+
+            assignments = assignProcess.GetAllAssignmentByEmployeeID(employeeID);
+            return View(assignments);
+        }
+
     }
 }
