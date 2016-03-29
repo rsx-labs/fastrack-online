@@ -269,8 +269,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../Content/fonts/glyphicons-halflings-regular.eot');
+  src: url('../Content/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../Content/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../Content/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../Content/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../Content/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -282,6 +282,7 @@ th {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding:10px;
 }
 .glyphicon-asterisk:before {
   content: "\002a";
@@ -337,6 +338,7 @@ th {
 }
 .glyphicon-th-list:before {
   content: "\e012";
+
 }
 .glyphicon-ok:before {
   content: "\e013";
@@ -358,6 +360,7 @@ th {
 }
 .glyphicon-cog:before {
   content: "\e019";
+
 }
 .glyphicon-trash:before {
   content: "\e020";
@@ -397,6 +400,7 @@ th {
 }
 .glyphicon-list-alt:before {
   content: "\e032";
+  
 }
 .glyphicon-lock:before {
   content: "\e033";
@@ -5473,6 +5477,13 @@ button.list-group-item-danger.active:focus {
 .panel-body {
   padding: 15px;
 }
+
+.panel-body.fujitsu{
+     background-image:url("../Images/fujitsu_infinity_1.png") ;
+      background-repeat:no-repeat;
+      background-position:right;
+}
+
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
@@ -6787,5 +6798,12 @@ button.close {
   .navbar .dropdown-menu a {
     color: #fff;
   }
+}
+
+.required:after 
+{
+    content: "*";
+    font-weight: bold;
+    color: red; 
 }
 

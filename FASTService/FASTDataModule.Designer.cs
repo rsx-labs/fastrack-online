@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Dev\FASTWeb_Mtrilles_0208\FASTWeb\FASTService\FASTDataModule.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Dev\MS NET\FASTWebv1.2\FASTWebv1.2\FASTWeb\FASTService\FASTDataModule.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

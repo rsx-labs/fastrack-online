@@ -109,8 +109,8 @@
 
                 <div class="form-group">
                     <div class="col-md-3 pull-right">
-                        <input type="submit" value="Save changes" class="btn btn-default" />
-                        <a class="btn btn-default" href="@Url.Action("Index","Home")">Cancel</a>
+                        <input type="submit" value="Save changes" class="btn btn-primary" />
+                        @Html.ActionLink("Back", null, null, null, new { href = Request.UrlReferrer, @class="btn btn-default" })
                     </div>
                 </div>
             </fieldset>

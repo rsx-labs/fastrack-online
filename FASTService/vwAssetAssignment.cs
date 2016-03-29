@@ -14,7 +14,7 @@ namespace FASTService
     
     public partial class vwAssetAssignment
     {
-        public Nullable<int> AssetAssignmentID { get; set; }
+        public int AssetAssignmentID { get; set; }
         public Nullable<int> EmployeeID { get; set; }
         public Nullable<int> FixAssetID { get; set; }
         public string Model { get; set; }

@@ -41,7 +41,19 @@ namespace FASTService.Process
         }
 
 
+        public vwAssetAssignment GetAssignmentByID(int assignID)
+        {
+            List<vwAssetAssignment> assignments = (from assigns in FastDB.vwAssetAssignments
+                                                   where assigns.AssetAssignmentID == assignID
+                                                   select assigns).ToList();
 
+            if ( assignments != null )
+            {
+                return assignments[0];
+            }
+
+            return null;
+        }
 
     }
 }

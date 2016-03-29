@@ -45,6 +45,7 @@
         <AssociationConnector Association="FASTDBModel.FK_AssetAssignment_Employee" />
         <AssociationConnector Association="FASTDBModel.FK_AssetAssignment_FixAsset" />
         <AssociationConnector Association="FASTDBModel.FK_AssetAssignment_AssignmentStatus" />
+        <EntityTypeShape EntityType="FASTDBModel.vwAccessRight" Width="1.5" PointX="15.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

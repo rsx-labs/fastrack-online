@@ -1,76 +1,36 @@
 ﻿@model IEnumerable<FASTWeb.Models.FixAsset.FixAssetViewModel>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Fix Asset List";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //Test
+    
+    var list = new WebGrid(Model, canPage: true, rowsPerPage: 20, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "listContainer");
+    list.Pager(WebGridPagerModes.NextPrevious);
 }
 
-<h2>Assets</h2>
+<br />
+<div id="listContainer">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Fixed Asset List</h3>
+        </div>
+        <div class="panel-body" style="background-color:firebrick">
+            <a class="btn btn-default pull-right" href="@Url.Action("NewAsset","FixAsset")">New Asset</a>
+        </div>
+        <div class="panel-body">
+            @list.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+        columns: list.Columns(
+                 list.Column("FixAssetID", "Asset ID", canSort: true, style: "col-lg-1"),
+                 list.Column("AssetTag", "Asset Tag", canSort: true, style: "col-lg-1"),
+                 list.Column("SerialNumber", "Serial Number", canSort: false, style: "col-lg-2"),
+                 list.Column("AssetType", "Type", canSort: true, style: "col-lg-1"),
+                 list.Column("Brand", "Brand", canSort: true, style: "col-lg-1"),
+                 list.Column("Model", "Model", canSort: false, style: "col-lg-1"),
+                 list.Column("AcquisitionDate", "Acquisition Date", canSort: false, style: "col-lg-2"),
+                 list.Column("AssetClass", "Class", canSort: true, style: "col-lg-1"),
+                          list.Column("AssetStatus", "Status", canSort: true, style: "col-lg-1"),         
+                 list.Column(format: (item) => Html.ActionLink("Edit", "EditAsset", new { mod = item.FixAssetID }), style: "column-action")
+                ))
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "NewAsset")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Model)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SerialNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AssetTag)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Brand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.AssetType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AssetStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AssetClass)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Model)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SerialNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssetTag)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Brand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remarks)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssetType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssetStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssetClass)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditAsset", new { mod=item.FixAssetID }) 
-        </td>
-    </tr>
-}
-
-</table>

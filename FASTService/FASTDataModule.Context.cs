@@ -51,5 +51,6 @@ namespace FASTService
         public DbSet<vwManagersList> vwManagersLists { get; set; }
         public DbSet<vwMISList> vwMISLists { get; set; }
         public DbSet<AccessLevel> AccessLevels { get; set; }
+        public DbSet<vwAccessRight> vwAccessRights { get; set; }
     }
 }

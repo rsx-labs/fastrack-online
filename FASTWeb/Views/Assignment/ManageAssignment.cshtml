@@ -1,0 +1,54 @@
+﻿@model FASTWeb.Models.Assignment.ManageAssignmentViewModel
+@{
+    ViewBag.Title = "Manage Assignment";
+    
+    if ( ViewBag.Action == null )
+    {
+        ViewBag.Action = 5;
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal col-lg-12">
+        @Html.ValidationSummary(true)
+        <h2>Manage Assignment # @Model.AssetAssignmentID</h2>
+        <hr />
+        <h4>Asset Status : @Model.StatusDescription</h4>
+        <h4>Assignment Status : @Model.AssignmentStatus</h4>
+        <hr />
+        <h4>Assignment Owner : @Model.GetOwner()</h4> 
+        <h4>Asset Tag : @Model.AssetTag</h4>
+        <h4>Serial Number : @Model.SerialNumber</h4>
+        <h4>Asset Description : @Model.Brand @Model.Model @Model.TypeDescription</h4>
+        <hr />
+        @if ( @Model.AssetStatusID == 6)
+        {
+            <h4>Receiving Employee : @Model.GetTo()</h4>
+            <hr />
+        }     
+       
+        <div class="form-group">
+            <div class="col-md-3">
+                @if ( @ViewBag.Action == 0 )
+                {
+                    <input type="submit" name="Accept" value="Accept" class="btn btn-primary" />
+                    <input type="submit" name="Reject" value="Reject" class="btn btn-default" />
+                }
+                else if (@ViewBag.Action == 1)
+                {
+                    <input type="submit" name="Approve" value="Approve" class="btn btn-primary" />
+                    <input type="submit" name="Deny" value="Deny" class="btn btn-default" />
+                }
+                else
+                {
+                    <input type="submit" name="Transfer" value="Transfer" class="btn btn-primary" />
+                    <input type="submit" name="Release" value="Release" class="btn btn-default" />
+                }
+            </div>
+        </div>
+    </div>
+}
+

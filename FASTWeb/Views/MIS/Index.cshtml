@@ -1,0 +1,108 @@
+﻿@{
+    FASTService.Process.TransactionProcess transProcess = new FASTService.Process.TransactionProcess();
+    //FASTService.vwDepartmentList department = (FASTService.vwDepartmentList)TempData["Department"];
+    FASTService.Process.EmployeeManagementProcess empProcess = new FASTService.Process.EmployeeManagementProcess();
+   
+    ViewBag.Title = "MIS";
+
+    List<FASTService.vwAssetAssignmentsForMI> acceptances = new List<FASTService.vwAssetAssignmentsForMI>();
+    List<FASTService.vwAssetAssignmentsForMI> assignments = new List<FASTService.vwAssetAssignmentsForMI>();
+
+    acceptances = ViewBag.Acceptances;
+    assignments = ViewBag.Assignments;
+    
+    var listAcceptances = new WebGrid(acceptances, canPage: true, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "acceptContainer");
+    listAcceptances.Pager(WebGridPagerModes.NextPrevious);
+
+    var listAssigns = new WebGrid(assignments, canPage: true, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "assignContainer");
+    listAssigns.Pager(WebGridPagerModes.NextPrevious);
+
+
+}
+<br />
+
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">MIS</h1>
+        </div>
+    </div>
+    <div>
+        <div class="panel-info col-lg-3">
+            <div class="panel-heading">
+                <span class="panel-title" />
+            </div>
+            <div class="panel-body" style="background-color:aliceblue">
+                <center>
+                    <img src="~/Images/MIS.jpg" width="200" height="200" class="img-rounded" />
+                </center>
+            </div>
+            <div class="panel-body" style="background-color:snow">
+                <div class="list-group list-group-item-info">
+                    <a class="list-group-item" href="@Url.Action("Unavailable", "Home")"><span class="glyphicon glyphicon-th-list text-danger" aria-hidden="true"></span>Tools</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-info col-lg-9">
+            <div class="panel-info">
+                <div class="panel-body" style="height: 200px;background-image:url('../Images/fujitsu_infinity_1.png');background-repeat:no-repeat;background-position:right">
+                    <h3>Management Information System</h3>
+                    @*<blockquote>
+                            <h4>Number of employees : 12</h4>
+                            <h4>Number of assets assigned :</h4>
+                        </blockquote>*@
+                    <p style="padding-left:10px">
+                        <a href="#assignments" class="text-primary"><span class="glyphicon glyphicon-bookmark text-success"></span>Assignments   <span class="badge">(0)</span></a> <br />
+                        <a href="#acceptances" class="text-primary"><span class="glyphicon glyphicon-bookmark text-success"></span>For Acceptance   <span class="badge">(0)</span></a>
+                    </p>
+                </div>
+            </div>
+            <br />
+            <hr />
+            <div class="panel-info">
+                <a name="acceptances"></a>
+                <div class="panel-heading">
+                    <h3 class="panel-title">Waiting for Acceptance</h3>
+                </div>
+                <div class="panel-body" id="acceptContainer">
+                                @listAcceptances.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+                                columns: listAcceptances.Columns(
+                                listAcceptances.Column("AssetAssignmentID", "Assign ID", canSort: true, style: "col-lg-2"),
+                                listAcceptances.Column("AssetTag", "Asset Tag", canSort: true, style: "col-lg-3"),
+                                listAcceptances.Column("", "Owner", format: (item) =>
+                                {
+                                    var name = empProcess.GetEmployeeProfile(item.EmployeeID);
+                                    return Html.Raw("<p>" + name.LastName + " , " + name.FirstName + "</p>");
+                                }, canSort: false, style: "col-lg-2"),
+                                listAcceptances.Column("StatusDescription", "Asset Status", canSort: false, style: "col-lg-3"),
+                                listAcceptances.Column(format: (item) => Html.ActionLink("Manage", "ManageAssignment", "Assignment", new { assignID = item.AssetAssignmentID}, new { @class = "btn btn-primary" }), style: "column-action")
+                        ))
+                </div>
+                <div class="panel-info">
+                    <a name="assignments"></a>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Assignments</h3>
+                    </div>
+                    <div class="panel-body" id="assignContainer">
+                        @listAssigns.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+                        columns: listAssigns.Columns(
+                        listAssigns.Column("AssetAssignmentID", "Assign ID", canSort: true, style: "col-lg-2"),
+                        listAssigns.Column("AssetTag", "Asset Tag", canSort: true, style: "col-lg-3"),
+                        listAssigns.Column("","Owner", format:(item) =>
+                        {
+                            var name = empProcess.GetEmployeeProfile(item.EmployeeID);
+                            return Html.Raw("<p>" + name.LastName + " , " + name.FirstName + "</p>");
+                        },canSort:false,style:"col-lg-2"),
+                        listAssigns.Column("StatusDescription", "Asset Status", canSort: false, style: "col-lg-3"),
+                                 listAssigns.Column(format: (item) => Html.ActionLink("Manage", "ManageAssignment", "Assignment", new { assignID = item.AssetAssignmentID }, new { @class = "btn btn-primary" }), style: "column-action")
+                        ))
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />

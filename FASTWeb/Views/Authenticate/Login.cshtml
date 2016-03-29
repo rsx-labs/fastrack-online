@@ -4,14 +4,19 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-4">
+<div class="row" >
+    <div class="col-md-4" >
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Authenticate", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
+                <div style="float:left">
+                    <img src="../Images/fastrack_1.png" height="40" width="40" />
+                </div>
+                <div style="padding-left:50px">
+                    <h1>User Login</h1>
+                </div>
+                
                 <hr />
                 @Html.ValidationSummary(true)
                 <div class="form-group">
@@ -49,32 +54,30 @@
                 </p>
             }
         </section>
-    </div>
-    <div class="col-md-8">
-        <section id="infopage">
-            @Html.Partial("_MainInfoPagePartial")
-        </section>
+        <br/>
         <div>
             <div class="panel">
-                <div class="panel-warning">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <p>
-                                <img src="../Images/news.jpg" width="30" height="30" />
-                                Download the required barcode scanner app from the <a href="https://play.google.com/store/apps/details?id=com.google.zxing.client.android&hl=en">Google Store</a>
-                            </p>
-                        </li>
-                        <li class="list-group-item">
-                            <p>
-                                <img src="../Images/news.jpg" width="30" height="30" />
-                                Download FASTRACK here.
-                            </p>
-                        </li>
-                     </ul>
-                     <br />
+                <div class="panel-info">
+                    <div class="panel-heading">
+                        <h5>App Updates</h5>
+                    </div>
+                    <div class="panel-body">
+                        <p >
+                            <blockquote style="font-size:12px;font-style:italic">
+                                FASTRACK beta  is now live.  You can start activating your accounts by registration and start downloading the app from the @Html.ActionLink("download page","DownloadPage","Home").
+                            </blockquote>
+                        </p>
+                    </div>
+                    <br />
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-8">
+        <br/><br /><br /><br />
+        <section id="infopage">
+            @Html.Partial("_MainInfoPagePartial")
+        </section>
     </div>
     
 </div>

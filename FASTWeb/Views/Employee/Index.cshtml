@@ -1,109 +1,51 @@
 ﻿@model IEnumerable<FASTWeb.Models.Employee.EmployeeViewModel>
 
 @{
-    ViewBag.Title = "Index2";
+    ViewBag.Title = "Employee List";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    var list = new WebGrid(Model, canPage: true, rowsPerPage: 20, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "listContainer");
+    list.Pager(WebGridPagerModes.NextPrevious);
+
+    string deptName = String.Empty;
+
+    if (ViewBag.Department != null) 
+    {
+        deptName = " - " + ViewBag.Department;
+    }
+    
 }
 
-<h2>Employee list</h2>
-
-<p>
-    @Html.ActionLink("Create New", "NewEmployee")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmailAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Department)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Position)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-    @if (Model != null)
-    {
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MiddleName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Position)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompanyName)
-                </td>
-                <td>
-                    @if(item.Status == 1)
-                    {
-                        @Html.Label("Active", "Active");
-                    }
-                    else
-                    {
-                        @Html.Label("Inactive", "Inactive");
-                    }
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditEmployee", new { mod = item.EmployeeID }) 
-                </td>
-            </tr>
-        }
-    }
-    else
-    {
-        <tr>
-            <td colspan="11"> No records to display</td>
-        </tr>
-    }
-
-
-</table>
+<br />
+<div id="listContainer">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Employee List @deptName</h3>
+        </div>
+        <div class="panel-body" style="background-color:firebrick">
+            <a class="btn btn-default pull-right" href="@Url.Action("NewEmployee","Employee")">New Employee</a>
+        </div>
+        <div class="panel-body">
+            @list.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+        columns: list.Columns(
+                 list.Column("EmployeeID", "Employee ID", canSort: true, style: "col-lg-2"),
+                 list.Column("LastName","Full Name", format: (item) => item.LastName + " , " + item.FirstName + " " +item.MiddleName, canSort: true, style: "col-lg-3"),
+                 list.Column("Gender", "Gender", canSort: false, style: "col-lg-1"),
+                 list.Column("EmailAddress", "Email", canSort: false, style: "col-lg-2"),
+                 list.Column("Position", "Position", canSort: false, style: "col-lg-2"),
+                 list.Column("Status", "Active", canSort: false, format: (item) =>
+                                      {
+                                            if ( item.Status == 1)
+                                            {
+                                                return Html.Raw("<img src='../Images/check_ok.png' height='20px' width='20px'/>");
+                                            }
+                                            else
+                                            {
+                                                return Html.Raw("<img src='../Images/check_disabled.png' height='20px' width='20px'/>");
+                                            }
+                                      }),
+                 list.Column(format: (item) => Html.ActionLink("Edit","EditEmployee",new { mod = item.EmployeeID}), style: "column-action")
+                ))
+        </div>
+    </div>
+</div>

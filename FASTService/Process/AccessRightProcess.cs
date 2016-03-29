@@ -34,6 +34,10 @@ namespace FASTService.Process
             
        }
 
-
+       public List<vwAccessRight> GetAccesRightsView()
+        {
+            return (from access in FastDB.vwAccessRights
+                    select access).ToList();
+        }
     }
 }

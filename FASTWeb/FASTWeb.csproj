@@ -182,9 +182,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Common\ExtensionClasses.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AppAdminController.cs" />
+    <Compile Include="Controllers\AssignmentController.cs" />
     <Compile Include="Controllers\AuditTrailController.cs" />
     <Compile Include="Controllers\AuthenticateController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -197,6 +199,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Assignment\ManageAssignmentViewModel.cs" />
     <Compile Include="Models\Audit\AuditTrailFilter.cs" />
     <Compile Include="Models\Authenticate\ChangePasswordModel.cs" />
     <Compile Include="Models\Authenticate\LoginCredentialModel.cs" />
@@ -211,6 +214,7 @@
     <Content Include="Content\bootstrap-fasttheme_1.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -246,23 +250,34 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\appadmin.jpg" />
+    <Content Include="Images\audittrail.jpg" />
+    <Content Include="Images\check_disabled.png" />
+    <Content Include="Images\check_ok.png" />
     <Content Include="Images\custodian.png" />
     <Content Include="Images\default_avatar_female.jpg" />
     <Content Include="Images\default_avatar_male.jpg" />
     <Content Include="Images\department.jpg" />
-    <Content Include="Images\fastrack_online.png" />
-    <Content Include="Images\fastrack_online_b.png" />
+    <Content Include="Images\downloadv0001.png" />
+    <Content Include="Images\fujitsucloud.jpg" />
     <Content Include="Images\fujitsu_infinity_1.png" />
     <Content Include="Images\fastrack_1.png" />
+    <Content Include="Images\mainimage.png" />
+    <Content Include="Images\MIS.jpg" />
     <Content Include="Images\news.jpg" />
+    <Content Include="Images\reports.jpg" />
     <Content Include="Images\weserv_logo.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\fastrackOnlinev0505.pubxml" />
+    <None Include="Properties\PublishProfiles\fastrackOnlinev0506.pubxml" />
     <None Include="Properties\PublishProfiles\MMT.pubxml" />
+    <None Include="Properties\PublishProfiles\v0500.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -329,16 +344,16 @@
     <Content Include="Views\Manager\_PartialManageUnavailable.cshtml" />
     <Content Include="Views\Report\MyAssignedAssetsReport.cshtml" />
     <Content Include="Views\Report\MyAssetHistoryReport.cshtml" />
+    <Content Include="Views\MIS\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\AppAdmin\ViewAccessRights.cshtml" />
+    <Content Include="Views\Home\DownloadPage.cshtml" />
+    <Content Include="Views\Assignment\ManageAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\MIS\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

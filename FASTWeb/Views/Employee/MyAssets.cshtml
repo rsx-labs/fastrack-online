@@ -1,6 +1,6 @@
 ﻿@model FASTService.Model.EmployeeDashboardViewModel
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "My Assets";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     FASTService.Process.AssignmentProcess assignProcess = new FASTService.Process.AssignmentProcess();
@@ -19,10 +19,9 @@
 }
 <br/>
 <div id="mainProfile"  class="container-fluid col-lg-12"  >
-    <div id="profileContainer" class="panel panel-primary" >
+    <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title pull-left">Employee Profile</h3>
-            <div class="clearfix"></div>
+            <h1 class="panel-title">Employee Assets</h1>
         </div>
     </div>
     <div>
@@ -44,32 +43,32 @@
                     <hr/>
                 </center>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-7" >
                 <div class="panel-heading">
                 </div>
-                <h3>@Model.FirstName @Model.MiddleName @Model.LastName</h3> 
+                <h3>@Model.FirstName @Model.MiddleName @Model.LastName</h3>
                 <blockquote class="col-lg-6">
                     <h5>@Model.Position</h5>
                     <h6>@Model.Department</h6>
                     <h6>@Model.EmailAddress</h6>
                     <h6>@Model.PhoneNumber</h6>
-                    
+
                 </blockquote>
                 <br />
 
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="panel-heading">
                 </div>
                 <div class="panel panel-body">
                     <ul class="list-group">
                         <li class="list-group-item small">
                             <span class="badge">(@assignments.Count().ToString())</span>
-                            <h4 class="text-primary">Assigned</h4>
+                            <a class="text-primary" href="#ssignments"><span class="glyphicon glyphicon-bookmark text-success"></span>Assigned</a>
                         </li>
                         <li class="list-group-item small">
                             <span class="badge">(@forAcceptance.Count().ToString())</span>
-                            <h4 class="text-primary">For Acceptance</h4>
+                            <a class="text-primary" href="#acceptances"><span class="glyphicon glyphicon-bookmark text-success"></span>For Acceptance</a>
                         </li>
                     </ul>
                     <br />
@@ -78,9 +77,10 @@
         </div>
     </div>   
 </div>
-<br/><br/>
+<br/>
 <div class="col-lg-12">
-    <div id="profileContainer" class="panel panel-info">
+    <div id="assignedContainer" class="panel panel-info">
+        <a name="assignments"></a>
         <div class="panel-heading">
             <h3 class=" panel-title pull-left">Assigned Assets</h3>
             <div class="clearfix"></div>
@@ -94,15 +94,16 @@
             gridAssignments.Column("TypeDescription", "Asset Type", canSort: true, style: "col-lg-2"),
             gridAssignments.Column("Brand", "Brand", canSort: false, style: "col-lg-1"),
             gridAssignments.Column("Model", "Model", canSort: false, style: "col-lg-2"),
-            gridAssignments.Column("DateAssigned", "Date Accepted", canSort: true, style: "col-lg-3", format: (item) => string.Format("{0:MM-dd-yyyy}",item.DateAssigned ))))
+            gridAssignments.Column("DateAssigned", "Date Assigned", canSort: true, style: "col-lg-3", format: (item) => string.Format("{0:MM-dd-yyyy}",item.DateAssigned ))))
         </div>
         <div class="panel-body">
             <a class="btn btn-default pull-right" href="@Url.Action("MyAssignedAssetsReport","Report")" target="_blank">Print</a>
         </div>
     </div>
 </div>
-<div id="acceptance" class="col-lg-12">
-    <div id="profileContainer" class="panel panel-info">
+<div class="col-lg-12">
+<div id="acceptanceContainer" class="panel panel-info">
+    <a name="acceptances"></a>
         <div class="panel-heading">
             <h3 class=" panel-title pull-left">Waiting for Acceptance</h3>
             <div class="clearfix"></div>
@@ -116,12 +117,12 @@
                      gridAcceptance.Column("TypeDescription", "Asset Type", canSort: true, style: "col-lg-2"),
                      gridAcceptance.Column("Brand", "Brand", canSort: false, style: "col-lg-1"),
                      gridAcceptance.Column("Model", "Model", canSort: false, style: "col-lg-2"),
-                     gridAcceptance.Column("DateAssigned", "Date Accepted", canSort: true, style: "col-lg-3", format: (item) => string.Format("{0:MM-dd-yyyy}", item.DateAssigned))))
+                     gridAcceptance.Column("DateAssigned", "Date Assigned", canSort: true, style: "col-lg-3", format: (item) => string.Format("{0:MM-dd-yyyy}", item.DateAssigned))))
         </div>
     </div>
 </div>
-<div id="history" class="col-lg-12">
-    <div id="profileContainer" class="panel panel-info">
+<div class="col-lg-12">
+    <div id="history" class="panel panel-info">
         <div class="panel-heading">
             <h3 class=" panel-title pull-left">Assignment History</h3>
             <div class="clearfix"></div>
@@ -131,11 +132,14 @@
             columns: gridHistory.Columns(
                               gridHistory.Column("AssetAssignmentID", "Assign ID", canSort: true, style: "col-lg-1"),
                               gridHistory.Column("AssetTag", "Asset Tag", canSort: true, style: "col-lg-2"),
-                              gridHistory.Column("SerialNumber", "Serial No", canSort: true, style: "col-lg-2"),
                               gridHistory.Column("TypeDescription", "Asset Type", canSort: true, style: "col-lg-2"),
                               gridHistory.Column("Brand", "Brand", canSort: false, style: "col-lg-1"),
-                              gridHistory.Column("Model", "Model", canSort: false, style: "col-lg-2"),
-                              gridHistory.Column("DateAssigned", "Date Accepted", canSort: true, style: "col-lg-3", format: (item) => string.Format("{0:MM-dd-yyyy}", item.DateAssigned))))
+                              gridHistory.Column("StatusDescription", "Asset Status", canSort: false, style: "col-lg-2"),
+                              gridHistory.Column("AssignmentStatus", "Assign Status", canSort: false, style: "col-lg-2"),
+                              gridHistory.Column("DateAssigned", "Date Assigned", canSort: true, style: "col-lg-2", format: (item) => string.Format("{0:MM-dd-yyyy}", item.DateAssigned)),
+                              gridHistory.Column("DateReleased", "Date Released", canSort: true, style: "col-lg-2")
+                              ))
+
         </div>
         <div class="panel-body">
             <a class="btn btn-default pull-right" href="@Url.Action("MyAssetHistoryReport","Report")" target="_blank">Print</a>

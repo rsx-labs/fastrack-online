@@ -141,6 +141,9 @@
       <DependentUpon>FASTDataModule.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Encryption.cs" />
+    <Compile Include="vwAccessRight.cs">
+      <DependentUpon>FASTDataModule.tt</DependentUpon>
+    </Compile>
     <Compile Include="vwAssetAssignment.cs">
       <DependentUpon>FASTDataModule.tt</DependentUpon>
     </Compile>

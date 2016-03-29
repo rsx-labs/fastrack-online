@@ -114,5 +114,20 @@ namespace FASTService.Process
            return true;
        }
 
+       public List<vwFixAssetList> GetAssetsForRepair()
+       {
+           return (from assets in FastDB.vwFixAssetLists
+                       where assets.AssetStatusID == Common.Constants.ASSET_STATUS_FORREPAIR
+                       select assets).ToList();
+           
+       }
+
+       public List<vwFixAssetList> GetReleasedAssets()
+       {
+           return (from assets in FastDB.vwFixAssetLists
+                       where assets.AssetStatusID == Common.Constants.ASSET_STATUS_RELEASED
+                       select assets).ToList();
+           
+       }
     }
 }
