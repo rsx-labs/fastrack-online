@@ -19,6 +19,5 @@ namespace FASTWeb.Models.Authenticate
         [Display(Name = "New Password")]
         public string NewPassword { get; set; }
 
-
     }
 }
