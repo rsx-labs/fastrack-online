@@ -8,6 +8,7 @@ namespace FASTWeb.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
 
@@ -23,6 +24,8 @@ namespace FASTWeb.Controllers
             
         }
 
+        [AllowAnonymous
+        ]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -30,6 +33,7 @@ namespace FASTWeb.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -37,7 +41,14 @@ namespace FASTWeb.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Unavailable()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult DownloadPage()
         {
             return View();
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FASTWeb.Common;
 
 namespace FASTWeb.Controllers
 {
@@ -11,6 +12,7 @@ namespace FASTWeb.Controllers
     {
         //
         // GET: /Manager/
+        [Authorize]
         public ActionResult Index()
         {
 
@@ -33,6 +35,7 @@ namespace FASTWeb.Controllers
             return View(departments);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Index(int departmentID)
         {
@@ -44,6 +47,13 @@ namespace FASTWeb.Controllers
         {
             FASTService.Process.DepartmentProcess deptProcess= new FASTService.Process.DepartmentProcess();
             FASTService.vwDepartmentList department = deptProcess.GetDepartmentDetail(departmentID);
+            FASTService.Process.TransactionProcess transProcess = new FASTService.Process.TransactionProcess();
+
+            List<FASTService.vwAssetAssignmentsForManager> approvals = new List<FASTService.vwAssetAssignmentsForManager>();
+            approvals = transProcess.GetAssetAssignmentsForManagerByDeptID(department.DepartmentID, User.Identity.Name.ToInteger());
+
+            ViewBag.Approvals = approvals;
+            
             TempData["Department"] = department;
 
             return View();

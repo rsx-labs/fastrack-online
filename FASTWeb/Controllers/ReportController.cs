@@ -25,6 +25,7 @@ namespace FASTWeb.Controllers
     {
         //
         // GET: /Reports/
+        [Authorize]
         public ActionResult Index()
         {
             return View();

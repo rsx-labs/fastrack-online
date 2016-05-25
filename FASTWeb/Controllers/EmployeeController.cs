@@ -12,6 +12,7 @@ namespace FASTWeb.Controllers
 {
     public class EmployeeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             EmployeeManagementProcess employeeManagement = new EmployeeManagementProcess();
@@ -31,6 +32,34 @@ namespace FASTWeb.Controllers
             }).ToList();
             return View(EmployeeList);
         }
+
+        [Authorize]
+        public ActionResult ShowDepartmentEmployee(int departmentID)
+        {
+            EmployeeManagementProcess employeeManagement = new EmployeeManagementProcess();
+            DepartmentProcess deptProcess = new DepartmentProcess();
+            var EmployeeList = employeeManagement.GetAllEmployee().Where(i => i.DepartmentID == departmentID).Select(k => new EmployeeViewModel
+            {
+                FirstName = k.FirstName,
+                MiddleName = k.MiddleName,
+                LastName = k.LastName,
+                EmployeeID = k.EmployeeID,
+                Gender = k.Gender,
+                Position = k.Position,
+                PhoneNumber = k.PhoneNumber,
+                EmailAddress = k.EmailAddress,
+                Department = k.Department,
+                CompanyName = k.CompanyName,
+                Status = k.Status,
+            }).ToList();
+
+            ViewBag.Department = deptProcess.GetDepartmentDetail(departmentID).GroupName;
+
+
+            return View("Index",EmployeeList);
+        }
+
+        [Authorize]
         public ActionResult NewEmployee()
         {
             DepartmentProcess department = new DepartmentProcess();
@@ -40,6 +69,7 @@ namespace FASTWeb.Controllers
             return View(new EmployeeViewModel());
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult NewEmployee(EmployeeViewModel model)
         {
@@ -69,6 +99,7 @@ namespace FASTWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult EditEmployee(int mod)
         {
             int EmployeeID = mod;
@@ -102,6 +133,7 @@ namespace FASTWeb.Controllers
             
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult EditEmployee(EmployeeViewModel model)
         {
@@ -131,6 +163,7 @@ namespace FASTWeb.Controllers
             return RedirectToAction("MyAssets", "Employee");
         }
 
+        [Authorize]
         public ActionResult MyAssets()
         {
             FASTService.Process.EmployeeManagementProcess employeeProcess = new EmployeeManagementProcess();

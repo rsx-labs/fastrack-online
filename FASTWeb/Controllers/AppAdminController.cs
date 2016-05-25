@@ -15,5 +15,19 @@ namespace FASTWeb.Controllers
         {
             return View();
         }
+
+        [Authorize]
+        public ActionResult ViewAccessRights()
+        {
+            List<FASTService.vwAccessRight> rights = new List<FASTService.vwAccessRight>();
+            FASTService.Process.AccessRightProcess accessProcess = new FASTService.Process.AccessRightProcess();
+
+            rights = accessProcess.GetAccesRightsView();
+
+            return View(rights);
+        }
+
+        //[Authorize]
+        //public ActionResult NewAccess()
 	}
 }

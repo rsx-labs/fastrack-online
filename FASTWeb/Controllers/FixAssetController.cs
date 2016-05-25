@@ -13,6 +13,7 @@ namespace FASTWeb.Controllers
     {
         //
         // GET: /FixAsset/
+        [Authorize]
         public ActionResult Index()
         {
             FixAssetManagementProcess fixAssetManagement = new FixAssetManagementProcess();
@@ -39,6 +40,8 @@ namespace FASTWeb.Controllers
             });
             return View(AssetList);
         }
+
+        [Authorize]
         public ActionResult NewAsset()
         {
             FixAssetManagementProcess assetManagement = new FixAssetManagementProcess();
@@ -54,6 +57,7 @@ namespace FASTWeb.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult SaveNewAsset(FixAssetViewModel assetModel)
         {
             FixAssetModel asset = new FixAssetModel();
@@ -71,7 +75,7 @@ namespace FASTWeb.Controllers
             if (assetModel.LocationID != null)
                 asset.LocationID = assetModel.LocationID;
             asset.AssetTypeID = assetModel.AssetTypeID;
-            asset.AssetStatusID = assetModel.AssetStatusID;
+            asset.AssetStatusID = 2;
             asset.AssetClassID = assetModel.AssetClassID;
             FixAssetManagementProcess assetManagement = new FixAssetManagementProcess();
             bool success = assetManagement.NewAsset(asset);
@@ -79,6 +83,8 @@ namespace FASTWeb.Controllers
             return RedirectToAction("Index");
         }
         
+
+        [Authorize]
         public ActionResult EditAsset(int mod)
         {
             int FixAssetID = mod;
@@ -97,16 +103,16 @@ namespace FASTWeb.Controllers
                 Remarks = k.Remarks,
                 AcquisitionDate = k.AcquisitionDate,
                 ExpiryDate = k.ExpiryDate,
-
                 Issuer = k.Issuer,
-
+                IssuerID = k.IssuerID,
                 Location = k.Location,
-
+                LocationID = k.LocationID,
                 AssetType = k.AssetType,
-
+                AssetTypeID = k.AssetTypeID,
                 AssetStatus = k.AssetStatus,
-
-                AssetClass = k.AssetClass
+                AssetStatusID = k.AssetStatusID,
+                AssetClass = k.AssetClass,
+                AssetClassID = k.AssetClassID
             }).FirstOrDefault();
 
             ViewBag.Location = location.GetLocations();
@@ -117,6 +123,7 @@ namespace FASTWeb.Controllers
             return View(AssetDetails);
         }
         
+        [Authorize]
         [HttpPost]
         public ActionResult EditAsset(FixAssetViewModel assetModel)
         {
