@@ -1,0 +1,85 @@
+﻿@model IEnumerable<FASTService.vwAssetAssignment>
+@{
+    Layout = null;
+    int empID = 0;
+    Int32.TryParse(User.Identity.Name, out empID);
+    FASTService.Process.EmployeeManagementProcess process = new FASTService.Process.EmployeeManagementProcess();
+    FASTService.Model.EmployeeModel employee = process.GetEmployeeProfile(empID);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    <title>Employee Asset History</title>
+</head>
+<body>
+    <div class="container">
+        <h3>FASTrack Online Reports</h3>
+        <h4>Employee Asset History</h4>
+        <hr />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="padding-left:20px">
+                        <p style="font-size:larger;font-style:oblique">@employee.EmployeeID</p>
+                    </th>
+                    <th style="padding-left:20px">
+                        <p style="font-size:larger;font-style:oblique">@employee.FirstName @employee.MiddleName @employee.LastName</p>
+                    </th>
+                </tr>
+            </thead>
+            <tr style="padding-left:10px">
+                <td style="padding-left:20px">
+                    <p>
+                        @employee.Position
+                    </p>
+                </td>
+                <td style="padding-left:20px">
+                    <p>
+                        @employee.Department
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr style="background-color:gray">
+                    <th style="text-align:center;width:100px">Assign ID</th>
+                    <th style="text-align: center;width:100px">Asset Tag</th>
+                    <th style="text-align: center;width:100px">Serial Number</th>
+                    <th style="text-align: center;width:100px">Type</th>
+                    <th style="text-align: center;width:120px">Brand</th>
+                    <th style="text-align: center;width:120px">Model</th>
+                    <th style="text-align: center">Date Assigned</th>
+                    <th style="text-align: center">Date Released</th>
+                    <th style="text-align: center">Asset Status</th>
+                    <th style="text-align: center">Assign Status</th>
+
+                </tr>
+            </thead>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.AssetAssignmentID)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.AssetTag)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.SerialNumber)</td>
+                        <td style="text-align: left">@Html.DisplayFor(modelItem => item.TypeDescription)</td>
+                        <td style="text-align: left">@Html.DisplayFor(modelItem => item.Brand)</td>
+                        <td style="text-align: left">@Html.DisplayFor(modelItem => item.Model)</td>
+                        <td style="text-align: left">@String.Format("{0:MM-dd-yyyy}", item.DateAssigned)</td>
+                        <td style="text-align: left">@String.Format("{0:MM-dd-yyyy}", item.DateReleased)</td>
+                        <td style="text-align: left">@Html.DisplayFor(modelItem => item.StatusDescription)</td>
+                        <td style="text-align: left">@Html.DisplayFor(modelItem => item.AssignmentStatus)</td>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+    var result = TempData["Result"];
+    var source = TempData["Source"];
+}
+
+<div class="container-fluid">
+    <br />
+    <div class="jumbotron fujitsu">
+        <div style="height:300px">
+            <h2 class="text-info">@result</h2>
+            @if (String.Compare(result.ToString().ToUpper(), "SUCCESSFUL") == 0)
+            {
+                <p>@source was successful.</p>
+            }
+            else
+            {
+                <p>@source was not successful. Please go back, check your inputs and try again.</p>
+            }
+        </div>
+        @Html.ActionLink("Back", null, null, null, new { href = Request.UrlReferrer })
+    </div>
+  
+</div>

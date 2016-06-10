@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FASTWeb.Models.FixAsset.FixAssetViewModel>
+@{
+    ViewBag.Title = "Fix Asset List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    var list = new WebGrid(Model, canPage: true, rowsPerPage: 20, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "listContainer");
+    list.Pager(WebGridPagerModes.NextPrevious);
+}
+
+<br />
+<div id="listContainer">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Fixed Asset List</h3>
+        </div>
+        <div class="panel-body" style="background-color:firebrick">
+            <a class="btn btn-default pull-right" href="@Url.Action("NewAsset","FixAsset")">New Asset</a>
+        </div>
+        <div class="panel-body">
+            @list.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+        columns: list.Columns(
+                 list.Column("FixAssetID", "Asset ID", canSort: true, style: "col-lg-1"),
+                 list.Column("AssetTag", "Asset Tag", canSort: true, style: "col-lg-1"),
+                 list.Column("SerialNumber", "Serial Number", canSort: false, style: "col-lg-2"),
+                 list.Column("AssetType", "Type", canSort: true, style: "col-lg-1"),
+                 list.Column("Brand", "Brand", canSort: true, style: "col-lg-1"),
+                 list.Column("Model", "Model", canSort: false, style: "col-lg-1"),
+                 list.Column("AcquisitionDate", "Acquisition Date", canSort: false, style: "col-lg-2"),
+                 list.Column("AssetClass", "Class", canSort: true, style: "col-lg-1"),
+                          list.Column("AssetStatus", "Status", canSort: true, style: "col-lg-1"),         
+                 list.Column(format: (item) => Html.ActionLink("Edit", "EditAsset", new { mod = item.FixAssetID }), style: "column-action")
+                ))
+        </div>
+    </div>
+</div>
+

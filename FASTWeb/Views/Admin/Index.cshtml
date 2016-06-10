@@ -1,0 +1,131 @@
+﻿@{
+    FASTService.Process.TransactionProcess transProcess = new FASTService.Process.TransactionProcess();
+    //FASTService.vwDepartmentList department = (FASTService.vwDepartmentList)TempData["Department"];
+    ViewBag.Title = "Property Custodians";
+
+    List<FASTService.vwAssetAssignmentsForCustodian> forAcceptance = new List<FASTService.vwAssetAssignmentsForCustodian>();
+    List<FASTService.vwFixAssetList> forRepair = new List<FASTService.vwFixAssetList>();
+    List<FASTService.vwFixAssetList> released = new List<FASTService.vwFixAssetList>();
+
+    forAcceptance = ViewBag.Acceptances;
+    forRepair = ViewBag.Repairs;
+    released = ViewBag.Releases;
+     
+    var listAcceptance = new WebGrid(forAcceptance, canPage: true, rowsPerPage: 20, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "listContainer");
+    listAcceptance.Pager(WebGridPagerModes.NextPrevious);
+
+    var listRepair = new WebGrid(forRepair, canPage: true, rowsPerPage: 20, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "listContainer");
+    listRepair.Pager(WebGridPagerModes.NextPrevious);
+    
+    var listReleased = new WebGrid(released, canPage: true, rowsPerPage: 20, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "listContainer");
+    listReleased.Pager(WebGridPagerModes.NextPrevious);
+    
+}
+<br />
+
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">Property Custodians</h1>
+        </div>
+    </div>
+    <div>
+        <div class="panel-info col-lg-3">
+            <div class="panel-heading">
+                <span class="panel-title" />
+            </div>
+            <div class="panel-body" style="background-color:aliceblue">
+                <center>
+                    <img src="~/Images/custodian.png" width="200" height="200" class="img-rounded" />
+                </center>
+            </div>
+            <div class="panel-body" style="background-color:whitesmoke">
+                <div class="list-group list-group-item-info">
+                    <a class="list-group-item" href="@Url.Action("Index","FixAsset")"><span class="glyphicon glyphicon-th-list text-danger" aria-hidden="true"></span>Fix Assets List</a>
+                    <a class="list-group-item" href="@Url.Action("Unavailable","Home")"><span class="glyphicon glyphicon-th-list text-danger" aria-hidden="true"></span>New Assignment</a>
+                    <a class="list-group-item" href="@Url.Action("Unavailable", "Home")"><span class="glyphicon glyphicon-th-list text-danger" aria-hidden="true"></span>Releases</a>
+                    <a class="list-group-item" href="@Url.Action("Unavailable", "Home")"><span class="glyphicon glyphicon-th-list text-danger" aria-hidden="true"></span>Repairs</a>
+                    <a class="list-group-item" href="@Url.Action("Unavailable", "Home")"><span class="glyphicon glyphicon-th-list text-danger" aria-hidden="true"></span>Decommissions</a>
+                    <a class="list-group-item" href="@Url.Action("Unavailable", "Home")"><span class="glyphicon glyphicon-th-list text-danger" aria-hidden="true"></span>Others</a>
+                </div>
+            </div>
+            <div class="panel-body" style="background-color:snow;height:50px">
+            </div>
+
+        </div>
+        <div class="panel-info col-lg-9">
+            <div class="panel-info">
+                <div class="panel-body" style="height: 200px;background-image:url('../Images/fujitsu_infinity_1.png');background-repeat:no-repeat;background-position:right">
+                    <h3>Property Custodians</h3>
+                    @*<blockquote>
+                            <h4>Number of employees : 12</h4>
+                            <h4>Number of assets assigned :</h4>
+                        </blockquote>*@
+                    <a href="#acceptances"><span class="glyphicon glyphicon-bookmark text-success"></span>For Acceptance <span class="badge">(0)</span></a><br/>
+                    <a href="#repairs"><span class="glyphicon glyphicon-bookmark text-success"></span>For Repair <span class="badge">(0)</span></a><br/>
+                    <a href="#releases"><span class="glyphicon glyphicon-bookmark text-success"></span>Released <span class="badge">(0)</span></a><br/>
+                </div>
+            </div>
+            <br />
+            <hr />
+            <div class="panel-info">
+                <a name="acceptances"></a>
+                <div class="panel-heading">
+                    <h3 class="panel-title">Waiting for Acceptance</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-body">
+                                @listAcceptance.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+                                columns: listAcceptance.Columns(
+                                listAcceptance.Column("AssetAssignmentID", "Assign ID", canSort: true, style: "col-lg-2"),
+                                listAcceptance.Column("AssetTag", "Asset Tag", canSort: true, style: "col-lg-3"),
+                                listAcceptance.Column("StatusDescription", "Asset Status", canSort: false, style: "col-lg-2"),
+                                listAcceptance.Column("AssignmentStatus", "Assignment Status", canSort: false, style: "col-lg-2")
+                                        //list.Column(format: (item) => Html.ActionLink("Edit", "EditEmployee", new { mod = item.EmployeeID }), style: "column-action")
+                     ))
+                </div>
+            </div>
+            </div>
+            <div class="panel-info">
+                    <a name="repairs"></a>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">For Repairs</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel-body">
+                            @listRepair.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+                                columns: listRepair.Columns(
+                                listRepair.Column("FixAssetID", "Asset ID", canSort: true, style: "col-lg-2"),
+                                listRepair.Column("AssetTag", "Asset Tag", canSort: true, style: "col-lg-3"),
+                                listRepair.Column("SerialNumber", "Serial No", canSort: true, style: "col-lg-2"),
+                                listRepair.Column("TypeDescription", "Asset Type", canSort: false, style: "col-lg-2"),
+                                listRepair.Column("Brand", "Brand", canSort: false, style: "col-lg-2"),
+                                listRepair.Column(format: (item) => Html.ActionLink("Manage", "Unavailable","Home", null, new {@class="btn btn-primary" }), style: "column-action")
+                     ))
+                        </div>
+                    </div>
+                </div>
+            <div class="panel-info">
+                    <a name="releases"></a>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Released Assets</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel-body">
+                            @listReleased.GetHtml(tableStyle: "table table-striped table-hover", headerStyle: "header", alternatingRowStyle: "alternateRow", selectedRowStyle: "select",
+                                columns: listReleased.Columns(
+                                listReleased.Column("FixAssetID", "Asset ID", canSort: true, style: "col-lg-2"),
+                                listReleased.Column("AssetTag", "Asset Tag", canSort: true, style: "col-lg-3"),
+                                listReleased.Column("SerialNumber", "Serial No", canSort: true, style: "col-lg-2"),
+                                listReleased.Column("TypeDescription", "Asset Type", canSort: false, style: "col-lg-2"),
+                                listReleased.Column("Brand", "Brand", canSort: false, style: "col-lg-2"),
+                                listReleased.Column(format: (item) => Html.ActionLink("Manage", "Unavailable", "Home", null, new { @class = "btn btn-primary" }), style: "column-action")
+                     ))
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+</div>
+<br />
